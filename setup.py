@@ -9,7 +9,7 @@ from setuptools import setup
 
 HERE = osp.abspath(osp.dirname(__file__))
 sys.path.insert(0, HERE)
-import pibooth_extra_lights as plugin  # nopep8 : import shall be done after adding setup to paths
+import pibooth_extra_lights_vim4 as plugin  # nopep8 : import shall be done after adding setup to paths
 
 
 def main():
@@ -34,8 +34,8 @@ def main():
             'Topic :: Multimedia :: Graphics :: Capture :: Digital Camera',
         ],
         author="Vincent Verdeil, Antoine Rousseaux, Christophe (ceeeeb)",
-        url="https://github.com/ceeeeb/pibooth-extra-lights",
-        download_url="https://github.com/ceeeeb/pibooth-extra-lights/archive/{}.tar.gz".format(plugin.__version__),
+        url="https://github.com/ceeeeb/pibooth-extra-lights-vim4",
+        download_url="https://github.com/ceeeeb/pibooth-extra-lights-vim4/archive/{}.tar.gz".format(plugin.__version__),
         license='GPLv3',
         platforms=['unix', 'linux'],
         keywords=[
@@ -43,13 +43,13 @@ def main():
             'camera',
             'photobooth'
         ],
-        py_modules=['pibooth_extra_lights'],
+        py_modules=['pibooth_extra_lights_vim4'],
         python_requires=">=3.6",
         install_requires=[
             'pibooth-ceeeeb>=2.0.8.3',
         ],
         zip_safe=False,  # Don't install the lib as an .egg zipfile
-        entry_points={'pibooth': ["pibooth_extra_lights = pibooth_extra_lights"]},
+        entry_points={'pibooth': ["pibooth_extra_lights_vim4 = pibooth_extra_lights_vim4"]},
     )
 
 
