@@ -33,9 +33,9 @@ def main():
             'Natural Language :: English',
             'Topic :: Multimedia :: Graphics :: Capture :: Digital Camera',
         ],
-        author="Vincent Verdeil, Antoine Rousseaux",
-        url="https://github.com/pibooth/pibooth-extra-lights",
-        download_url="https://github.com/pibooth/pibooth-extra-lights/archive/{}.tar.gz".format(plugin.__version__),
+        author="Vincent Verdeil, Antoine Rousseaux, Christophe (ceeeeb)",
+        url="https://github.com/ceeeeb/pibooth-extra-lights",
+        download_url="https://github.com/ceeeeb/pibooth-extra-lights/archive/{}.tar.gz".format(plugin.__version__),
         license='GPLv3',
         platforms=['unix', 'linux'],
         keywords=[
@@ -46,7 +46,7 @@ def main():
         py_modules=['pibooth_extra_lights'],
         python_requires=">=3.6",
         install_requires=[
-            'pibooth>=2.0.0',
+            'pibooth-ceeeeb>=2.0.8.3',
         ],
         zip_safe=False,  # Don't install the lib as an .egg zipfile
         entry_points={'pibooth': ["pibooth_extra_lights = pibooth_extra_lights"]},
