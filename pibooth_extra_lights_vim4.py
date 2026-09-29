@@ -3,10 +3,10 @@
 """Pibooth plugin for extra lights management."""
 
 import pibooth
-from gpiozero import LEDBoard
+from pibooth.hardware import LedGroup
 
 
-__version__ = "1.0.2"
+__version__ = "1.1.0"
 
 
 @pibooth.hookimpl
@@ -26,24 +26,23 @@ def pibooth_configure(cfg):
                    "If True, flash LED is lighting by setting pin(s) to HIGH else by setting to LOW")
 
 
+def create_leds(app, cfg, pin_option, active_high_option):
+    """Return the group of LEDs declared by the given configuration options.
+
+    Pins are the physical ones of the header: app.board knows which GPIO
+    backend the running machine needs.
+    """
+    active_high = cfg.getboolean('CONTROLS', active_high_option)
+    return LedGroup(*(app.board.create_led(pin, active_high)
+                      for pin in cfg.gettuple('CONTROLS', pin_option, int)))
+
+
 @pibooth.hookimpl
 def pibooth_startup(app, cfg):
-    """Create the LED instances.
-
-    .. note:: gpiozero is configured as BCM, use a string with "BOARD" to
-               use BOARD pin numbering.
-    """
-    app.led_startup = LEDBoard(*("BOARD{}".format(pin)
-                               for pin in cfg.gettuple('CONTROLS', 'startup_led_pin', int)),
-                               active_high=cfg.getboolean('CONTROLS', 'startup_led_active_high'))
-
-    app.led_sequence = LEDBoard(*("BOARD{}".format(pin)
-                                for pin in cfg.gettuple('CONTROLS', 'preview_led_pin', int)),
-                                active_high=cfg.getboolean('CONTROLS', 'preview_led_active_high'))
-
-    app.led_flash = LEDBoard(*("BOARD{}".format(pin)
-                             for pin in cfg.gettuple('CONTROLS', 'flash_led_pin', int)),
-                             active_high=cfg.getboolean('CONTROLS', 'flash_led_active_high'))
+    """Create the LED instances."""
+    app.led_startup = create_leds(app, cfg, 'startup_led_pin', 'startup_led_active_high')
+    app.led_sequence = create_leds(app, cfg, 'preview_led_pin', 'preview_led_active_high')
+    app.led_flash = create_leds(app, cfg, 'flash_led_pin', 'flash_led_active_high')
 
     # Initial state
     app.led_startup.on()
