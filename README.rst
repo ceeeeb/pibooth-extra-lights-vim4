@@ -1,11 +1,11 @@
 
-====================
-pibooth-extra-lights
-====================
+=========================
+pibooth-extra-lights-vim4
+=========================
 
 |PythonVersions| |PypiPackage| |Downloads|
 
-``pibooth-extra-lights`` is a plugin for the `pibooth`_ application.
+``pibooth-extra-lights-vim4`` is a plugin for the `pibooth`_ application.
 
 It adds 3 extra lights:
 
@@ -18,7 +18,7 @@ Install
 
 ::
 
-    $ pip3 install pibooth-extra-lights
+    $ pip3 install pibooth-extra-lights-vim4
 
 Configuration
 -------------
@@ -86,3 +86,22 @@ Here is the diagram for hardware connections.
 .. |Downloads| image:: https://img.shields.io/pypi/dm/pibooth-extra-lights?color=purple
    :target: https://pypi.org/project/pibooth-extra-lights
    :alt: PyPi downloads
+
+Fork
+----
+
+This is a fork of `pibooth-extra-lights`_ by Vincent Verdeil and Antoine
+Rousseaux, released under the same GPLv3 licence. It is published under its own
+name so that both can live side by side, and it runs on a Raspberry Pi just as
+well as on the boards the upstream plugin can not reach.
+
+Change from the upstream version: the LEDs are driven through ``app.board``,
+the GPIO layer of `pibooth-ceeeeb`_, instead of ``gpiozero``. The plugin
+therefore also works on boards exposing their GPIO through ``/dev/gpiochipN``,
+a Khadas VIM4 for instance, and pin numbers stay the physical ones of the 40
+pins header. Beware that the header pinout of a Khadas VIM4 is not the one of a
+Raspberry Pi: see the `VIM4 GPIO header`_ documentation.
+
+.. _VIM4 GPIO header: https://docs.khadas.com/products/sbc/vim4/applications/gpio/40pin-header
+.. _pibooth-extra-lights: https://github.com/pibooth/pibooth-extra-lights
+.. _pibooth-ceeeeb: https://github.com/ceeeeb/pibooth
